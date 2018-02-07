@@ -1,19 +1,41 @@
 version: '3.0'
-
 services:
   angular:
     build: angular-client
+    image: pablogm/angular-client
+    container_name: angular_container
     ports:
-     - "4200:4200"
+      - '4200:4200'
+    depends_on:
+      - express
 
   express:
     build: express-server
+    image: pablogm/express-server
+    container_name: express_container
     ports:
-     - "3000:3000"
-    links: 
-     - database
+      - '3000:3000'
+    depends_on:
+      - database
+    restart: always
+    environment:
+      MONGODB_ADMIN_DATABASE: $MONGODB_ADMIN_DATABASE
+      MONGODB_ADMIN_USER: $MONGODB_ADMIN_USER
+      MONGODB_ADMIN_PASS: $MONGODB_ADMIN_PASS
 
   database:
-    image: mongo
+    image: mongo:3.4.2
+    container_name: mongo_container
+    volumes:
+      - 'db-data:/data/db'
     ports:
-     - "27017:27017"
+      - '27017:27017'
+    command: mongod
+    environment:
+      MONGO_INITDB_DATABASE: $MONGODB_ADMIN_DATABASE
+      MONGO_INITDB_ROOT_USERNAME: $MONGODB_ADMIN_USER
+      MONGO_INITDB_ROOT_PASSWORD: $MONGODB_ADMIN_PASS
+
+volumes:
+  db-data:
+
