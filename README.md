@@ -5,6 +5,6 @@ First, install [Docker](https://docs.docker.com/install/) & [Docker Compose](htt
 ```
 $ git clone https://github.com/pablogarciamiranda/docker-mean
 $ cd docker-mean
-$ docker-compose build
-$ docker-compose up
+$ docker-compose up --build
 ```
+Don't forget to change the user and password credentials in .env file.
