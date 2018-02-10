@@ -13,8 +13,8 @@ RUN npm install
 # Bundle app source code inside Docker Image
 COPY . /usr/src/app
 
-# Bind app to port 4200
-EXPOSE 4200
+# Bind app to port 4200 and 49153
+EXPOSE 4200 49153
 
 # Run node.server.js
 CMD ["npm", "start"]

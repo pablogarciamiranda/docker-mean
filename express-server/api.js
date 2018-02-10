@@ -28,7 +28,7 @@ const User = mongoose.model('User', userSchema);
 /* GET api listing. */
 router.get('/', (req, res) => {
         console.log(res)
-        res.send('api works');
+        res.send('api works fine');
 });
 
 /* GET all users. */

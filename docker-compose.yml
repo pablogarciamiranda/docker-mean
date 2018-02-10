@@ -1,11 +1,15 @@
-version: '3.0'
+version: '2'
 services:
   angular:
     build: angular-client
     image: pablogm/angular-client
     container_name: angular_container
+    volumes:
+      - ./angular-client:/usr/src/app/
+      - angular-client-modules:/usr/src/app/node_modules
     ports:
       - '4200:4200'
+      - '49153:49153' #Port of Webpack for live reloading
     depends_on:
       - express
 
@@ -13,11 +17,13 @@ services:
     build: express-server
     image: pablogm/express-server
     container_name: express_container
+    volumes:
+      - ./express-server:/usr/src/app/
+      - server-modules:/usr/src/app/node_modules
     ports:
       - '3000:3000'
     depends_on:
       - database
-    restart: always
     environment:
       MONGODB_ADMIN_DATABASE: $MONGODB_ADMIN_DATABASE
       MONGODB_ADMIN_USER: $MONGODB_ADMIN_USER
@@ -38,4 +44,6 @@ services:
 
 volumes:
   db-data:
+  server-modules:
+  angular-client-modules:
 

@@ -5,11 +5,12 @@
   "author": "Pablo García Miranda <pablogm.grao@gmail.com>",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "nodemon -L server.js"
   },
   "dependencies": {
+    "body-parser": "~1.15.2",
     "express": "^4.16.1",
     "mongoose": "4.12.3",
-    "body-parser": "~1.15.2"
+    "nodemon": "^1.14.12"
   }
 }
